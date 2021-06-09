@@ -112,65 +112,65 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void CheckForUpdate() {
-        try{
-            version = this.getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
-
-            firebaseDatabase = FirebaseDatabase.getInstance();
-            databaseReference = firebaseDatabase.getReference("Version").child("versionNumber");
-            databaseReference.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    String versionName = (String) dataSnapshot.getValue();
-
-                    if(!versionName.equals(version)){
-                        //Toast.makeText(MainActivity.this, "Successful", Toast.LENGTH_SHORT).show();
-
-                        androidx.appcompat.app.AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this)
-                                .setTitle("New Version Available!")
-                                .setMessage("Please update our app to the latest version for continuous use.")
-                                .setPositiveButton("UPDATE", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Version").child("appUrl");
-                                        myRef.addValueEventListener(new ValueEventListener() {
-                                            @Override
-                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                                appUrl = dataSnapshot.getValue().toString();
-                                                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(appUrl)));
-                                                finish();
-                                            }
-
-                                            @Override
-                                            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                            }
-                                        });
-                                    }
-                                })
-                                .setNegativeButton("EXIT", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        finish();
-                                    }
-                                })
-                                .create();
-
-                        alertDialog.setCancelable(false);
-                        alertDialog.setCanceledOnTouchOutside(false);
-
-                        alertDialog.show();
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
-            });
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+//        try{
+//            version = this.getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
+//
+//            firebaseDatabase = FirebaseDatabase.getInstance();
+//            databaseReference = firebaseDatabase.getReference("Version").child("versionNumber");
+//            databaseReference.addValueEventListener(new ValueEventListener() {
+//                @Override
+//                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                    String versionName = (String) dataSnapshot.getValue();
+//
+//                    if(!versionName.equals(version)){
+//                        //Toast.makeText(MainActivity.this, "Successful", Toast.LENGTH_SHORT).show();
+//
+//                        androidx.appcompat.app.AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this)
+//                                .setTitle("New Version Available!")
+//                                .setMessage("Please update our app to the latest version for continuous use.")
+//                                .setPositiveButton("UPDATE", new DialogInterface.OnClickListener() {
+//                                    @Override
+//                                    public void onClick(DialogInterface dialog, int which) {
+//                                        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Version").child("appUrl");
+//                                        myRef.addValueEventListener(new ValueEventListener() {
+//                                            @Override
+//                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                                                appUrl = dataSnapshot.getValue().toString();
+//                                                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(appUrl)));
+//                                                finish();
+//                                            }
+//
+//                                            @Override
+//                                            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//                                            }
+//                                        });
+//                                    }
+//                                })
+//                                .setNegativeButton("EXIT", new DialogInterface.OnClickListener() {
+//                                    @Override
+//                                    public void onClick(DialogInterface dialog, int which) {
+//                                        finish();
+//                                    }
+//                                })
+//                                .create();
+//
+//                        alertDialog.setCancelable(false);
+//                        alertDialog.setCanceledOnTouchOutside(false);
+//
+//                        alertDialog.show();
+//                    }
+//                }
+//
+//                @Override
+//                public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//                }
+//            });
+//
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
     }
 
     private void FetchData() {

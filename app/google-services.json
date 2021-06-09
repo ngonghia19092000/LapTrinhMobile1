@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1020113551000",
+    "project_id": "ncovitrackerfinalproject",
+    "storage_bucket": "ncovitrackerfinalproject.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1020113551000:android:ff89ff011128bd0f00daed",
+        "android_client_info": {
+          "package_name": "com.finalproject.ncovitrackerproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1020113551000-6jhv5ikd2usicgf5rpmcdf510g0sd2f8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTbjVJFxXmg_6dG3J11devwVP0kT5QwSc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1020113551000-6jhv5ikd2usicgf5rpmcdf510g0sd2f8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -58,45 +58,45 @@ public class SplashActivity extends AppCompatActivity {
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     String versionName = (String) dataSnapshot.getValue();
 
-                    if(!versionName.equals(version)){
-                        //Toast.makeText(MainActivity.this, "Successful", Toast.LENGTH_SHORT).show();
-
-                        AlertDialog alertDialog = new AlertDialog.Builder(SplashActivity.this)
-                                .setTitle("New Version Available!")
-                                .setMessage("Please update our app to the latest version for continuous use.")
-                                .setPositiveButton("UPDATE", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Version").child("appUrl");
-                                        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                                            @Override
-                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                                appUrl = dataSnapshot.getValue().toString();
-                                                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(appUrl)));
-                                                finish();
-                                            }
-
-                                            @Override
-                                            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                            }
-                                        });
-                                    }
-                                })
-                                .setNegativeButton("EXIT", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        finish();
-                                    }
-                                })
-                                .create();
-
-                        alertDialog.setCancelable(false);
-                        alertDialog.setCanceledOnTouchOutside(false);
-
-                        alertDialog.show();
-                    }
-                    else{
+//                    if(!versionName.equals(version)){
+//                        //Toast.makeText(MainActivity.this, "Successful", Toast.LENGTH_SHORT).show();
+//
+//                        AlertDialog alertDialog = new AlertDialog.Builder(SplashActivity.this)
+//                                .setTitle("New Version Available!")
+//                                .setMessage("Please update our app to the latest version for continuous use.")
+//                                .setPositiveButton("UPDATE", new DialogInterface.OnClickListener() {
+//                                    @Override
+//                                    public void onClick(DialogInterface dialog, int which) {
+//                                        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Version").child("appUrl");
+//                                        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+//                                            @Override
+//                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                                                appUrl = dataSnapshot.getValue().toString();
+//                                                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(appUrl)));
+//                                                finish();
+//                                            }
+//
+//                                            @Override
+//                                            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//                                            }
+//                                        });
+//                                    }
+//                                })
+//                                .setNegativeButton("EXIT", new DialogInterface.OnClickListener() {
+//                                    @Override
+//                                    public void onClick(DialogInterface dialog, int which) {
+//                                        finish();
+//                                    }
+//                                })
+//                                .create();
+//
+//                        alertDialog.setCancelable(false);
+//                        alertDialog.setCanceledOnTouchOutside(false);
+//
+//                        alertDialog.show();
+//                    }
+//                    else{
                         int SPLASH_SCREEN_TIMEOUT = 2000;
                         new Handler().postDelayed(new Runnable() {
                             @Override
@@ -109,7 +109,7 @@ public class SplashActivity extends AppCompatActivity {
                         }, SPLASH_SCREEN_TIMEOUT);
                     }
 
-                }
+//                }
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
