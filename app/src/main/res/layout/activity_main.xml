@@ -520,6 +520,16 @@
 
             </GridLayout>
 
+            <Button
+                android:id="@+id/btnKhaiBao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:onClick="khaiBao"
+                android:text="Khai báo y tế"
+                android:textColor="#69f0ae"
+                android:textSize="16sp" />
+
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>

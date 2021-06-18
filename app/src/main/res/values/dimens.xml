@@ -1,0 +1,8 @@
+<resources>
+    <dimen name="my_view_left">30dp</dimen>
+    <dimen name="my_view_right">40dp</dimen>
+    <dimen name="my_view_left_edt">28dp</dimen>
+    <dimen name="title_margin_top">30dp</dimen>
+    <dimen name="my_view_top">20dp</dimen>
+    <dimen name="my_view_height">6dp</dimen>
+</resources>

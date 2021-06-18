@@ -1,6 +1,7 @@
 package com.finalproject.ncovitrackerproject;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -18,6 +19,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,7 +48,7 @@ import java.util.Date;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
-
+    private DatabaseReference database;
     private String version;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
@@ -59,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
     private PieChart pieChart;
 
     private LinearLayout lin_state_data, lin_world_data;
-
+private Button btnKhaiBao;
     private String str_confirmed, str_confirmed_new, str_active, str_active_new, str_recovered, str_recovered_new,
             str_death, str_death_new, str_tests, str_tests_new, str_last_update_time;
     private int int_active_new;
@@ -71,11 +73,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        CheckForUpdate();
-
         //setting up the titlebar text
         getSupportActionBar().setTitle("Tình hình Covid-19 tại Việt Nam");
+
+
 
         //Initialise
         Init();
@@ -110,69 +111,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+   public void khaiBao(View view){
 
-    private void CheckForUpdate() {
-//        try{
-//            version = this.getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
-//
-//            firebaseDatabase = FirebaseDatabase.getInstance();
-//            databaseReference = firebaseDatabase.getReference("Version").child("versionNumber");
-//            databaseReference.addValueEventListener(new ValueEventListener() {
-//                @Override
-//                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                    String versionName = (String) dataSnapshot.getValue();
-//
-//                    if(!versionName.equals(version)){
-//                        //Toast.makeText(MainActivity.this, "Successful", Toast.LENGTH_SHORT).show();
-//
-//                        androidx.appcompat.app.AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this)
-//                                .setTitle("New Version Available!")
-//                                .setMessage("Please update our app to the latest version for continuous use.")
-//                                .setPositiveButton("UPDATE", new DialogInterface.OnClickListener() {
-//                                    @Override
-//                                    public void onClick(DialogInterface dialog, int which) {
-//                                        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Version").child("appUrl");
-//                                        myRef.addValueEventListener(new ValueEventListener() {
-//                                            @Override
-//                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                                                appUrl = dataSnapshot.getValue().toString();
-//                                                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(appUrl)));
-//                                                finish();
-//                                            }
-//
-//                                            @Override
-//                                            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//                                            }
-//                                        });
-//                                    }
-//                                })
-//                                .setNegativeButton("EXIT", new DialogInterface.OnClickListener() {
-//                                    @Override
-//                                    public void onClick(DialogInterface dialog, int which) {
-//                                        finish();
-//                                    }
-//                                })
-//                                .create();
-//
-//                        alertDialog.setCancelable(false);
-//                        alertDialog.setCanceledOnTouchOutside(false);
-//
-//                        alertDialog.show();
-//                    }
-//                }
-//
-//                @Override
-//                public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//                }
-//            });
-//
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference();
+        databaseReference.child("users").child("user3").setValue("Ngo3 Minh Nghia");
+
     }
-
     private void FetchData() {
 
         //show progress dialog
@@ -208,18 +153,18 @@ public class MainActivity extends AppCompatActivity {
                                 public void run() {
                                     // setting up texted in the text view
                                     tv_confirmed.setText(NumberFormat.getInstance().format(Integer.parseInt(str_confirmed)));
-                                    tv_confirmed_new.setText("+"+NumberFormat.getInstance().format(Integer.parseInt(str_confirmed_new)));
+                                    tv_confirmed_new.setText("+" + NumberFormat.getInstance().format(Integer.parseInt(str_confirmed_new)));
 
                                     tv_active.setText(NumberFormat.getInstance().format(Integer.parseInt(str_active)));
 
 
-                                    tv_active_new.setText("+"+NumberFormat.getInstance().format(Integer.parseInt(str_confirmed_new)));
+                                    tv_active_new.setText("+" + NumberFormat.getInstance().format(Integer.parseInt(str_confirmed_new)));
 
                                     tv_recovered.setText(NumberFormat.getInstance().format(Integer.parseInt(str_recovered)));
-                                    tv_recovered_new.setText("+"+NumberFormat.getInstance().format(Integer.parseInt(str_recovered_new)));
+                                    tv_recovered_new.setText("+" + NumberFormat.getInstance().format(Integer.parseInt(str_recovered_new)));
 
                                     tv_death.setText(NumberFormat.getInstance().format(Integer.parseInt(str_death)));
-                                    tv_death_new.setText("+"+NumberFormat.getInstance().format(Integer.parseInt(str_death_new)));
+                                    tv_death_new.setText("+" + NumberFormat.getInstance().format(Integer.parseInt(str_death_new)));
 
                                     tv_tests.setText(NumberFormat.getInstance().format(Long.parseLong(str_tests)));
 
@@ -232,8 +177,7 @@ public class MainActivity extends AppCompatActivity {
                                     DismissDialog();
 
                                 }
-                            },1000);
-
+                            }, 1000);
 
 
                         } catch (JSONException e) {
@@ -317,7 +261,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId() == R.id.menu_about){
+        if (item.getItemId() == R.id.menu_about) {
             //Toast.makeText(MainActivity.this, "About menu icon clicked", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(MainActivity.this, AboutActivity.class));
         }
