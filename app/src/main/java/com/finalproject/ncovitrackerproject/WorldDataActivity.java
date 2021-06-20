@@ -56,7 +56,7 @@ public class WorldDataActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         //setting up the titlebar text
-        getSupportActionBar().setTitle("Covid-19 Tracker (World)");
+        getSupportActionBar().setTitle("Tình hình dịch Covid-19 (Thế giới)");
 
         //Initialise UI
         Init();

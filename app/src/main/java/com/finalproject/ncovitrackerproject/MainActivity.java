@@ -20,6 +20,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -54,13 +55,13 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference databaseReference;
     private String appUrl;
     private TextView tv_confirmed, tv_confirmed_new, tv_active, tv_active_new, tv_recovered, tv_recovered_new, tv_death,
-            tv_death_new, tv_tests, tv_tests_new, tv_date, tv_time;
+            tv_death_new, tv_tests, tv_date, tv_time;
 
     private SwipeRefreshLayout swipeRefreshLayout;
 
     private PieChart pieChart;
-
-    private LinearLayout lin_state_data, lin_world_data;
+    ImageButton imgHome, imgKhaibao, imgPhongdich, imgTaikhoan;
+    private LinearLayout  lin_world_data;
 private Button btnKhaiBao;
     private String str_confirmed, str_confirmed_new, str_active, str_active_new, str_recovered, str_recovered_new,
             str_death, str_death_new, str_tests, str_tests_new, str_last_update_time;
@@ -93,29 +94,31 @@ private Button btnKhaiBao;
             }
         });
 
-        lin_state_data.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Toast.makeText(MainActivity.this, "State data", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(MainActivity.this, StateWiseDataActivity.class));
-            }
-        });
+
 
         lin_world_data.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Toast.makeText(MainActivity.this, "World data", Toast.LENGTH_SHORT).show();
-                //Intent intent = new Intent(MainActivity.this, WorldDataActivity.class);
-                //startActivity(intent);
+
                 startActivity(new Intent(MainActivity.this, WorldDataActivity.class));
             }
         });
-    }
-   public void khaiBao(View view){
 
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference();
-        databaseReference.child("users").child("user3").setValue("Ngo3 Minh Nghia");
+//        lin_Phongdich.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                startActivity(new Intent(MainActivity.this, WorldDataActivity.class));
+//            }
+//        });
+//        lin_world_data.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                startActivity(new Intent(MainActivity.this, WorldDataActivity.class));
+//            }
+//        });
+        getSlide();
 
     }
     private void FetchData() {
@@ -242,14 +245,19 @@ private Button btnKhaiBao;
         tv_death = findViewById(R.id.activity_main_death_textview);
         tv_death_new = findViewById(R.id.activity_main_death_new_textview);
         tv_tests = findViewById(R.id.activity_main_samples_textview);
-        tv_tests_new = findViewById(R.id.activity_main_samples_new_textview);
+//        tv_tests_new = findViewById(R.id.activity_main_samples_new_textview);
         tv_date = findViewById(R.id.activity_main_date_textview);
         tv_time = findViewById(R.id.activity_main_time_textview);
 
         pieChart = findViewById(R.id.activity_main_piechart);
         swipeRefreshLayout = findViewById(R.id.activity_main_swipe_refresh_layout);
-        lin_state_data = findViewById(R.id.activity_main_statewise_lin);
+
         lin_world_data = findViewById(R.id.activity_main_world_data_lin);
+        imgHome = (ImageButton) findViewById(R.id.imgHome);
+        imgKhaibao = (ImageButton) findViewById(R.id.imgKhaiBao);
+        imgPhongdich = (ImageButton) findViewById(R.id.imgHelp);
+        imgTaikhoan = (ImageButton) findViewById(R.id.imgTK);
+
     }
 
     @Override
@@ -285,5 +293,36 @@ private Button btnKhaiBao;
                 doubleBackToExitPressedOnce = false;
             }
         }, 2000);
+    }
+
+    private void getSlide(){
+        imgHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentHome = new Intent(MainActivity.this, MainActivity.class);
+                startActivity(intentHome);
+            }
+        });
+        imgKhaibao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentKhaiBao = new Intent(MainActivity.this, Declaration.class);
+                startActivity(intentKhaiBao);
+            }
+        });
+//        imgPhongdich.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intentPhongDich = new Intent(MainActivity.this, phongdich.class);
+//                startActivity(intentPhongDich);
+//            }
+//        });
+//        imgTaikhoan.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intentThongTin = new Intent(MainActivity.this, ThongTin.class);
+//                startActivity(intentThongTin);
+//            }
+//        });
     }
 }

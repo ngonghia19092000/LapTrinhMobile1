@@ -12,6 +12,7 @@ public class Constants {
     public static final String STATE_RECOVERED_NEW = "stateRecoveredNew";
     public static final String STATE_LAST_UPDATE = "stateLastUpdate";
 
+
     //District Data Keys
     public static final String DISTRICT_NAME = "districtName";
     public static final String DISTRICT_CONFIRMED = "districtConfirmed";

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Declaration">
+
+    <TextView
+        android:id="@+id/txtKhaiBao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/title_margin_top"
+        android:layout_weight="0"
+        android:gravity="center"
+        android:text="Khai Báo Y Tế"
+        android:textColor="@color/title"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/txtThongtin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/my_view_left"
+        android:layout_marginTop="@dimen/my_view_top"
+        android:layout_weight="0"
+        android:textColor="@android:color/black"
+        android:text="Chọn thông tin sức khỏe hiện tại của bạn"
+        android:textSize="15sp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/my_view_left">
+        <TextView
+            android:id="@+id/txtThanNhiet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="Thân Nhiệt: " />
+
+        <EditText
+            android:id="@+id/edThanNhiet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:layout_marginRight="@dimen/my_view_right"
+            android:ems="10"
+            android:textSize="15sp"
+            android:hint="Nhập nhiệt độ cơ thể"
+
+            android:inputType="number" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/LinearLayoutChinh"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/my_view_left"
+        android:layout_marginTop="@dimen/my_view_top"
+        android:layout_marginRight="@dimen/my_view_right">
+
+        <LinearLayout
+            android:id="@+id/LinearLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <CheckBox
+                android:id="@+id/ckSot"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sốt" />
+
+            <CheckBox
+                android:id="@+id/ckHo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ho" />
+
+            <CheckBox
+                android:id="@+id/ckKhoTho"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Khó thở" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <CheckBox
+                android:id="@+id/ckDaunguoi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Đau người, mệt mỏi" />
+
+            <CheckBox
+                android:id="@+id/ckSuckhoeTot"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sức khỏe tốt" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnGui"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/my_view_left"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="@dimen/my_view_right"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:layout_weight="0"
+        android:text="Gửi thông tin" />
+
+    <LinearLayout
+        android:id="@+id/LinearLayoutKhaiBao"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtLichSu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/my_view_left"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="@dimen/my_view_right"
+            android:text="Lịch sử khai báo"
+            android:textColor="#DD5B1E"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <ListView
+            android:id="@+id/ListKhaiBao"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:visibility="visible" />
+    </LinearLayout>
+
+</LinearLayout>

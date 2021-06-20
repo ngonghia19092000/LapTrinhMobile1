@@ -49,7 +49,7 @@ public class CountryWiseDataActivity extends AppCompatActivity {
         setContentView(R.layout.activity_country_wise_data);
 
         //setting up the title to actionbar
-        getSupportActionBar().setTitle("World Data (Select Country)");
+        getSupportActionBar().setTitle("Quốc gia(Chọn quốc gia)");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 

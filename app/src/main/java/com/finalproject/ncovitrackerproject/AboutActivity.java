@@ -29,23 +29,21 @@ public class AboutActivity extends AppCompatActivity {
     }
 
     public void openWeb(View view) {
-        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.codewithshubh.com")));
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://developer.android.com/")));
     }
 
     public void openGit(View view) {
-        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.github.com/codewithshubh")));
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.github.com/")));
     }
 
-    public void openInsta(View view) {
-        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.instagram.com/codewithshubh")));
+    public void openFirebase(View view) {
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.firebase.google.com/")));
     }
 
-    public void openTwitter(View view) {
-        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.twitter.com/codewithshubh")));
-    }
+
 
     public void openFacebook(View view) {
-        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.facebook.com/codewithshubh")));
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/groups/nlu.mobile.programming/")));
     }
 
 }

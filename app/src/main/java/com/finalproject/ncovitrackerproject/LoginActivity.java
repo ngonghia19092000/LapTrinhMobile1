@@ -1,5 +1,6 @@
 package com.finalproject.ncovitrackerproject;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -33,14 +34,15 @@ public class LoginActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         getView();
         mAuth = FirebaseAuth.getInstance();
-
         Intent intent = getIntent();
+
         String taikhoandn = intent.getStringExtra("taikhoandk");
         String matkhaudn = intent.getStringExtra("matkhaudk");
         edTaiKhoandn.setText(taikhoandn);
@@ -90,8 +92,9 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(register);
     }
 
+
     private void Login(){
-        String email = edTaiKhoandn.getText().toString().trim();
+         String email = edTaiKhoandn.getText().toString().trim();
         String password = edMatKhaudn.getText().toString().trim();
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
@@ -99,6 +102,8 @@ public class LoginActivity extends AppCompatActivity {
                 if (task.isSuccessful()){
                     Toast.makeText(LoginActivity.this, "Đăng nhập thành công !", Toast.LENGTH_SHORT).show();
                     Intent intenthome = new Intent(LoginActivity.this, MainActivity.class);
+DataLocalManager.setEmailLogin(email);
+
                     startActivity(intenthome);
                 }else {
                     Toast.makeText(LoginActivity.this, "Đăng nhập thất bại", Toast.LENGTH_SHORT).show();
