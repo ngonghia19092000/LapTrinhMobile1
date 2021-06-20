@@ -45,6 +45,7 @@ public class HealthDeclarationAdapter extends BaseAdapter {
         LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         view = layoutInflater.inflate(layout, null);
         TextView txtNgay = (TextView) view.findViewById(R.id.txtNgay);
+        TextView txtDichuyen = (TextView) view.findViewById(R.id.txtDichuyen);
         TextView txtMota = (TextView) view.findViewById(R.id.txtMota);
         TextView txtThoiGian = (TextView) view.findViewById(R.id.txtThoiGian);
         ImageView imgButton = (ImageView) view.findViewById(R.id.imgViewLichsu);
@@ -54,6 +55,7 @@ public class HealthDeclarationAdapter extends BaseAdapter {
         txtMota.setText(khaiBaoHangNgay.getMota());
         txtThoiGian.setText(khaiBaoHangNgay.getThoiGian());
         imgButton.setImageResource(khaiBaoHangNgay.getHinh());
+        txtDichuyen.setText(khaiBaoHangNgay.getToAddress());
         return view;
     }
 }

@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:name=".MyApplication"
+        android:name=".Shared_Preferences.MyApplication"
         android:allowBackup="true"
         android:icon="@drawable/stay_home"
         android:label="Thống kê nCovi"
@@ -15,12 +15,6 @@
         android:theme="@style/Theme.AppCompat.Light">
 
 
-
-        <activity android:name=".LoginActivity" />
-        <activity
-            android:name=".RegisterActivity"
-            android:label="@string/title_activity_register"
-            android:theme="@style/NoActionBar" />
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,8 +27,11 @@
         <activity android:name=".CountryWiseDataActivity" />
         <activity android:name=".WorldDataActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".Declaration"/>
-
+        <activity android:name=".Declaration" />
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".ProfileActivity"/>
+        <activity android:name=".AntiEpidemicRules" />
+        <activity android:name=".LoginActivity" />
     </application>
 
 </manifest>

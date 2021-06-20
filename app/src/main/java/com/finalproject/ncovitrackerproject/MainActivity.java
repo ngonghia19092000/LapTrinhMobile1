@@ -14,6 +14,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -61,8 +62,8 @@ public class MainActivity extends AppCompatActivity {
 
     private PieChart pieChart;
     ImageButton imgHome, imgKhaibao, imgPhongdich, imgTaikhoan;
-    private LinearLayout  lin_world_data;
-private Button btnKhaiBao;
+    private LinearLayout lin_world_data;
+    private Button btnKhaiBao;
     private String str_confirmed, str_confirmed_new, str_active, str_active_new, str_recovered, str_recovered_new,
             str_death, str_death_new, str_tests, str_tests_new, str_last_update_time;
     private int int_active_new;
@@ -74,9 +75,8 @@ private Button btnKhaiBao;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //setting up the titlebar text
+        //Set title cho màn hình
         getSupportActionBar().setTitle("Tình hình Covid-19 tại Việt Nam");
-
 
 
         //Initialise
@@ -95,7 +95,7 @@ private Button btnKhaiBao;
         });
 
 
-
+//Chuyển đến tranh thống kê tình hình covid Thế giới
         lin_world_data.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,6 +121,8 @@ private Button btnKhaiBao;
         getSlide();
 
     }
+
+    //Lấy data từ api
     private void FetchData() {
 
         //show progress dialog
@@ -152,6 +154,7 @@ private Button btnKhaiBao;
 
                             Handler delayToshowProgress = new Handler();
                             delayToshowProgress.postDelayed(new Runnable() {
+                                //Đổ dữ liệu
                                 @Override
                                 public void run() {
                                     // setting up texted in the text view
@@ -245,13 +248,10 @@ private Button btnKhaiBao;
         tv_death = findViewById(R.id.activity_main_death_textview);
         tv_death_new = findViewById(R.id.activity_main_death_new_textview);
         tv_tests = findViewById(R.id.activity_main_samples_textview);
-//        tv_tests_new = findViewById(R.id.activity_main_samples_new_textview);
         tv_date = findViewById(R.id.activity_main_date_textview);
         tv_time = findViewById(R.id.activity_main_time_textview);
-
         pieChart = findViewById(R.id.activity_main_piechart);
         swipeRefreshLayout = findViewById(R.id.activity_main_swipe_refresh_layout);
-
         lin_world_data = findViewById(R.id.activity_main_world_data_lin);
         imgHome = (ImageButton) findViewById(R.id.imgHome);
         imgKhaibao = (ImageButton) findViewById(R.id.imgKhaiBao);
@@ -295,7 +295,7 @@ private Button btnKhaiBao;
         }, 2000);
     }
 
-    private void getSlide(){
+    private void getSlide() {
         imgHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -310,19 +310,19 @@ private Button btnKhaiBao;
                 startActivity(intentKhaiBao);
             }
         });
-//        imgPhongdich.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intentPhongDich = new Intent(MainActivity.this, phongdich.class);
-//                startActivity(intentPhongDich);
-//            }
-//        });
-//        imgTaikhoan.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intentThongTin = new Intent(MainActivity.this, ThongTin.class);
-//                startActivity(intentThongTin);
-//            }
-//        });
+        imgPhongdich.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentPhongDich = new Intent(MainActivity.this, AntiEpidemicRules.class);
+                startActivity(intentPhongDich);
+            }
+        });
+        imgTaikhoan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentThongTin = new Intent(MainActivity.this, ProfileActivity.class);
+                startActivity(intentThongTin);
+            }
+        });
     }
 }

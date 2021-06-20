@@ -5,7 +5,7 @@ public class HealthDeclaration {
     private String Mota;
     private String ThoiGian;
     private int Hinh;
-    private String email;
+    private String toAddress;
 
     public HealthDeclaration() {
     }
@@ -23,12 +23,12 @@ public class HealthDeclaration {
         Hinh = hinh;
     }
 
-    public HealthDeclaration(String email, String ngay, String mota, String thoiGian, int hinh) {
+    public HealthDeclaration(String ngay, String mota, String thoiGian, int hinh, String toAddress) {
         Ngay = ngay;
         Mota = mota;
         ThoiGian = thoiGian;
         Hinh = hinh;
-        email = email;
+        this.toAddress = toAddress;
     }
 
     public String getNgay() {
@@ -63,4 +63,11 @@ public class HealthDeclaration {
         Hinh = hinh;
     }
 
+    public String getToAddress() {
+        return toAddress;
+    }
+
+    public void setToAddress(String toAddress) {
+        this.toAddress = toAddress;
+    }
 }

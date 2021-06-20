@@ -8,18 +8,6 @@
     tools:context=".Declaration">
 
     <TextView
-        android:id="@+id/txtKhaiBao"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/title_margin_top"
-        android:layout_weight="0"
-        android:gravity="center"
-        android:text="Khai Báo Y Tế"
-        android:textColor="@color/title"
-        android:textSize="30sp"
-        android:textStyle="bold" />
-
-    <TextView
         android:id="@+id/txtThongtin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -50,10 +38,46 @@
             android:textSize="15sp"
             android:hint="Nhập nhiệt độ cơ thể"
 
-            android:inputType="number" />
+            android:inputType="numberDecimal" />
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_weight="0"
+        android:orientation="vertical">
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginLeft="30dp"
+            android:alignmentMode="alignMargins"
+            android:columnCount="2"
+            android:rowCount="2"
+            tools:ignore="UselessParent">
+
+            <TextView
+                android:id="@+id/txtDichuyen"
+                android:layout_width="111dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="Đã đến: " />
+
+            <EditText
+                android:id="@+id/dichuyen"
+                android:layout_width="232dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="40dp"
+                android:layout_weight="3"
+                android:ems="10"
+                android:hint="Nhập các điểm đã đến"
+                android:inputType="textMultiLine"
+
+                android:textSize="15sp" />
+
+        </GridLayout>
+    </LinearLayout>
     <LinearLayout
         android:id="@+id/LinearLayoutChinh"
         android:layout_width="match_parent"

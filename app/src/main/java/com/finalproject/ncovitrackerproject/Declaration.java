@@ -1,6 +1,7 @@
 package com.finalproject.ncovitrackerproject;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -10,11 +11,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.finalproject.ncovitrackerproject.Adapters.HealthDeclarationAdapter;
 import com.finalproject.ncovitrackerproject.Models.HealthDeclaration;
+import com.finalproject.ncovitrackerproject.Shared_Preferences.DataLocalManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -29,7 +32,7 @@ import java.util.Date;
 
 public class Declaration extends AppCompatActivity {
     TextView txtThanNhiet;
-    EditText edThanNhiet;
+    EditText edThanNhiet ,edDiChuyen;
     CheckBox ckSot, ckHo, ckKhoTho, ckDauNguoi, ckSucKhoeTot;
     Button btnGui;
     ListView lvLichSu;
@@ -38,20 +41,23 @@ public class Declaration extends AppCompatActivity {
     FirebaseDatabase firebaseDatabase;
     FirebaseUser user;
     DatabaseReference mData;
-    String dataString=DataLocalManager.getEmailLogin();
+    String dataString= DataLocalManager.getUserID();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_health_declaration);
+        getSupportActionBar().setTitle("Khai báo y tế");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         getView();
         setCheckbox();
         firebaseDatabase = FirebaseDatabase.getInstance();
-        mData = FirebaseDatabase.getInstance().getReference();
+        mData = FirebaseDatabase.getInstance().getReference("");
         user = FirebaseAuth.getInstance().getCurrentUser();
 
         khaiBaoAdapter = new HealthDeclarationAdapter(this, R.layout.history, ArrayListkhaiBaoHangNgay);
         lvLichSu.setAdapter(khaiBaoAdapter);
-        mData.child("Khai báo").addChildEventListener(new ChildEventListener() {
+        mData.child("Khai báo").child(dataString).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded( DataSnapshot snapshot,String previousChildName) {
                 HealthDeclaration healthDeclaration = snapshot.getValue(HealthDeclaration.class);
@@ -124,18 +130,18 @@ public class Declaration extends AppCompatActivity {
                         edThanNhiet.getText().toString().length() == 0) {
                     Toast.makeText(Declaration.this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
                 } else {
-                    int thannhiet = Integer.parseInt(edThanNhiet.getText().toString().trim());
-                    if (36 >= thannhiet || thannhiet >= 40) {
+                    double thannhiet = Double.parseDouble(edThanNhiet.getText().toString().trim());
+                    if (36 >= thannhiet || thannhiet >= 41) {
                         Toast.makeText(Declaration.this, "Thân nhiệt từ 36 đến 40 độ C", Toast.LENGTH_SHORT).show();
                     } else {
                         if (ckSucKhoeTot.isChecked()) {
 
                             suckhoe += ckSucKhoeTot.getText();
                             HealthDeclaration khaiBaoHangNgay1 = new HealthDeclaration(strDate, "Sức khỏe: \n" +
-                                    "\tThân Nhiệt: " + edThanNhiet.getText() + "\n\tTình trạng: " + suckhoe, strTime, R.drawable.ic_baseline_favorite);
+                                    "\tThân Nhiệt: " + edThanNhiet.getText() + "\n\tTình trạng: " + suckhoe, strTime, R.drawable.ic_baseline_favorite,"\n\t Đã đến :"+""+edDiChuyen.getText().toString());
 
-                            mData.child("Khai báo").push().setValue(khaiBaoHangNgay1);
-                            mData.child("Khai báo").addChildEventListener(new ChildEventListener() {
+                            mData.child("Khai báo").child(dataString).push().setValue(khaiBaoHangNgay1);
+                            mData.child("Khai báo").child(dataString).addChildEventListener(new ChildEventListener() {
                                 @Override
                                 public void onChildAdded(DataSnapshot snapshot, String previousChildName) {
                                     khaiBaoAdapter.notifyDataSetChanged();
@@ -163,10 +169,10 @@ public class Declaration extends AppCompatActivity {
                             });
                         } else {
                             HealthDeclaration khaiBaoHangNgay1 = new HealthDeclaration(strDate, "Sức khỏe: \n" +
-                                    "\tThân Nhiệt: " + edThanNhiet.getText() + "\n\tTình trạng: " + suckhoe, strTime, R.drawable.ic_baseline_event_busy);
+                                    "\tThân Nhiệt: " + edThanNhiet.getText() + "\n\tTình trạng: " + suckhoe, strTime, R.drawable.ic_baseline_event_busy,"\n\t Đã đến :"+""+edDiChuyen.getText().toString());
 
-                            mData.child("Khai báo").push().setValue(khaiBaoHangNgay1);
-                            mData.child("Khai báo").addChildEventListener(new ChildEventListener() {
+                            mData.child("Khai báo").child(dataString).push().setValue(khaiBaoHangNgay1);
+                            mData.child("Khai báo").child(dataString).addChildEventListener(new ChildEventListener() {
                                 @Override
                                 public void onChildAdded(DataSnapshot snapshot, String previousChildName) {
                                     khaiBaoAdapter.notifyDataSetChanged();
@@ -195,15 +201,25 @@ public class Declaration extends AppCompatActivity {
                             Canhbao();
                         }
                         edThanNhiet.setText("");
+                        edDiChuyen.setText("");
                     }
                 }
             }
         });
     }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home)
+            finish();
+        return super.onOptionsItemSelected(item);
+    }
+
+
     private void getView() {
         txtThanNhiet = (TextView) findViewById(R.id.txtThanNhiet);
         edThanNhiet = (EditText) findViewById(R.id.edThanNhiet);
+        edDiChuyen= (EditText)findViewById(R.id.dichuyen);
         ckSot = (CheckBox) findViewById(R.id.ckSot);
         ckHo = (CheckBox) findViewById(R.id.ckHo);
         ckKhoTho = (CheckBox) findViewById(R.id.ckKhoTho);
@@ -270,13 +286,7 @@ public class Declaration extends AppCompatActivity {
 
             }
         });
-        //Nút Cancel
-        //        b.setNegativeButton("Không đồng ý", new DialogInterface.OnClickListener() {
-        //            public void onClick(DialogInterface dialog, int id) {
-        //                dialog.cancel();
-        //            }
-        //        });
-        //Tạo dialog
+
         AlertDialog al = b.create();
         ///Hiển thị
         al.show();
