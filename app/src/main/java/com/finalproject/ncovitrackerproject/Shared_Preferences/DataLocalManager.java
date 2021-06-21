@@ -37,4 +37,5 @@ instance.sharedPreference= new SharedPreference(context);
     public  static boolean getFirstInstallApp(){
         return DataLocalManager.getInstance().sharedPreference.getBoolean(PREF_CHECK_INSTALL);
     }
+
 }

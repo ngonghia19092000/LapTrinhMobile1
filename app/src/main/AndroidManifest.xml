@@ -13,8 +13,8 @@
         android:roundIcon="@drawable/stay_home"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light">
-
-
+        <activity android:name=".ChangePasswordActivity"></activity>
+        <activity android:name=".UpdateInfoActivity" />
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,7 +29,7 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".Declaration" />
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".ProfileActivity"/>
+        <activity android:name=".ProfileActivity" />
         <activity android:name=".AntiEpidemicRules" />
         <activity android:name=".LoginActivity" />
     </application>

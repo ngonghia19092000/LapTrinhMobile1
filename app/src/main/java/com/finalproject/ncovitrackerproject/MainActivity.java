@@ -66,7 +66,6 @@ public class MainActivity extends AppCompatActivity {
     private Button btnKhaiBao;
     private String str_confirmed, str_confirmed_new, str_active, str_active_new, str_recovered, str_recovered_new,
             str_death, str_death_new, str_tests, str_tests_new, str_last_update_time;
-    private int int_active_new;
     private ProgressDialog progressDialog;
     private boolean doubleBackToExitPressedOnce = false;
     private Toast backPressToast;
@@ -101,23 +100,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 startActivity(new Intent(MainActivity.this, WorldDataActivity.class));
+
             }
         });
-
-//        lin_Phongdich.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                startActivity(new Intent(MainActivity.this, WorldDataActivity.class));
-//            }
-//        });
-//        lin_world_data.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                startActivity(new Intent(MainActivity.this, WorldDataActivity.class));
-//            }
-//        });
         getSlide();
 
     }
@@ -322,6 +307,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intentThongTin = new Intent(MainActivity.this, ProfileActivity.class);
                 startActivity(intentThongTin);
+
             }
         });
     }

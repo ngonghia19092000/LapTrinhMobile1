@@ -116,6 +116,7 @@ public class LoginActivity extends AppCompatActivity {
                   //App đã từng được chạy trên thiết bị
                     DataLocalManager.setFirstInstallApp(true);
                     startActivity(intenthome);
+                    finish();
                 } else {
                     Toast.makeText(LoginActivity.this, "Đăng nhập thất bại", Toast.LENGTH_SHORT).show();
                 }

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".UpdateInfoActivity">
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtHoTenCN"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/my_view_left"
+                android:layout_marginTop="@dimen/my_view_top"
+                android:layout_weight="0"
+                android:text="Họ và tên"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/edtHoTenCN"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/my_view_left_edt"
+                android:layout_marginRight="@dimen/my_view_right"
+                android:layout_weight="0"
+                android:ems="10"
+                android:hint="Nhập họ và tên"
+                android:inputType="text"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/txtCMNDCN"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/my_view_left"
+                android:layout_marginTop="@dimen/my_view_top"
+                android:layout_weight="0"
+                android:text="Số CMND"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/edtCMNDCN"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/my_view_left_edt"
+                android:layout_marginRight="@dimen/my_view_right"
+                android:enabled="false"
+                android:layout_weight="0"
+                android:ems="10"
+                android:hint="Nhập số CMND"
+                android:inputType="text"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/txtGioiTinhCN"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/my_view_left"
+                android:layout_marginTop="@dimen/my_view_top"
+                android:layout_weight="0"
+                android:text="Giới tính"
+                android:textSize="18sp" />
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/my_view_left"
+                android:layout_marginRight="@dimen/my_view_right"
+                android:layout_weight="0"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rbNamCN"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Nam" />
+
+                <RadioButton
+                    android:id="@+id/rbNuCN"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Nữ" />
+            </RadioGroup>
+
+
+            <TextView
+                android:id="@+id/txtNgaySinhCN"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/my_view_left"
+                android:layout_marginTop="@dimen/my_view_top"
+                android:layout_weight="0"
+                android:text="Ngày tháng năm sinh"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/edtNgaySinhCN"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:ems="10"
+                android:hint="dd/MM/YYYY"
+                android:layout_marginLeft="@dimen/my_view_left_edt"
+                android:layout_marginRight="@dimen/my_view_right"
+                android:inputType="date" />
+
+
+            <TextView
+                android:id="@+id/txtDiaChiCN"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/my_view_left"
+                android:layout_marginTop="@dimen/my_view_top"
+                android:layout_weight="0"
+                android:text="Nhập địa chỉ"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/edtDiaChiCN"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/my_view_left_edt"
+                android:layout_marginRight="@dimen/my_view_right"
+                android:layout_weight="0"
+                android:ems="10"
+                android:hint="Nhập địa chỉ"
+                android:inputType="text"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btnCapNhat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/my_view_left"
+                android:layout_marginTop="60dp"
+                android:layout_marginBottom="30dp"
+                android:layout_marginRight="@dimen/my_view_right"
+                android:layout_weight="0"
+                android:height="60dp"
+                android:background="@drawable/vang_nau"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:text="Cập Nhật" />
+
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>
