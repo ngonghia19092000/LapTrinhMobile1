@@ -13,5 +13,9 @@ public class Constants {
     public static final String COUNTRY_NEW_DECEASED = "todayDeaths";
     public static final String COUNTRY_FLAGURL = "flag";
     public static final String COUNTRY_RECOVERED = "recovered";
+    public static final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+            + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+    public static final String DATE_PATTERN =
+            "(0?[1-9]|1[012]) [/.-] (0?[1-9]|[12][0-9]|3[01]) [/.-] ((19|20)\\d\\d)";
 
 }

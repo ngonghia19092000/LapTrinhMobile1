@@ -43,6 +43,7 @@ import org.eazegraph.lib.models.PieModel;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -136,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
                             str_death = response.getString("deaths");
                             str_death_new = response.getString("todayDeaths");
                             str_tests = response.getString("tests");
-
+str_last_update_time = response.getString("updated");
                             Handler delayToshowProgress = new Handler();
                             delayToshowProgress.postDelayed(new Runnable() {
                                 //Đổ dữ liệu
@@ -158,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
                                     tv_death_new.setText("+" + NumberFormat.getInstance().format(Integer.parseInt(str_death_new)));
 
                                     tv_tests.setText(NumberFormat.getInstance().format(Long.parseLong(str_tests)));
-
+tv_time.setText(time(Long.parseLong(str_last_update_time)));
                                     pieChart.addPieSlice(new PieModel("Active", Integer.parseInt(str_active), Color.parseColor("#007afe")));
                                     pieChart.addPieSlice(new PieModel("Recovered", Integer.parseInt(str_recovered), Color.parseColor("#08a045")));
                                     pieChart.addPieSlice(new PieModel("Deceased", Integer.parseInt(str_death), Color.parseColor("#F6404F")));
@@ -194,7 +195,11 @@ public class MainActivity extends AppCompatActivity {
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
     }
+ public String time(long timeupd){
+     java.util.Date date=new java.util.Date(timeupd);
 
+     return date.toString();
+ }
     public void DismissDialog() {
         progressDialog.dismiss();
     }

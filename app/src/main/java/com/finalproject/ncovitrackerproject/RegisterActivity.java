@@ -31,8 +31,18 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.ParseException;
+import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+import java.util.regex.Pattern;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -73,26 +83,39 @@ public class RegisterActivity extends AppCompatActivity {
                     gioitinh = "Nữ";
                 }
 
-                if (hoten.length() == 0 || cmnd.length() == 0 || diachi.length() == 0 ||
-                        ngaysinh.length() == 0 || email.length() == 0 || gioitinh.length() == 0 ||
-                        matkhau1.length() == 0 || matkhau2.length() == 0) {
+                if (hoten.isEmpty()  || cmnd.isEmpty() || diachi.isEmpty() ||
+                        ngaysinh.isEmpty()|| email.isEmpty() || gioitinh.isEmpty() ||
+                        matkhau1.isEmpty() || matkhau2.isEmpty()) {
                     Toast.makeText(RegisterActivity.this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
-                } else {
-                    if (matkhau1.equals(matkhau2)) {
-                        Member member = new Member(hoten, gioitinh, diachi, ngaysinh, cmnd, email);
-                        DataTT.child("Thông tin cá nhân").child(cmnd).setValue(member);
-                        Toast.makeText(RegisterActivity.this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
-                        DangKy();
-                        Intent intentCapNhat = new Intent(RegisterActivity.this, LoginActivity.class);
-                        intentCapNhat.putExtra("taikhoandk", email);
-                        intentCapNhat.putExtra("matkhaudk", matkhau1);
-                        startActivity(intentCapNhat);
-                    } else {
-                        Toast.makeText(RegisterActivity.this, "Mật khẩu không giống nhau", Toast.LENGTH_SHORT).show();
+                }else if(hoten.matches("^[0-9]")) {
+                    Toast.makeText(RegisterActivity.this, "Vui lòng kiểm tra lại Họ Tên", Toast.LENGTH_SHORT).show();
+                }
+                else if(!(cmnd.length()==9||cmnd.length()==12)) {
+                    Toast.makeText(RegisterActivity.this, "Số CMND/CCCD nhập sai", Toast.LENGTH_SHORT).show();
+                }
+                else if(((Pattern.compile(Constants.EMAIL_PATTERN)).matcher(email)).matches()==false) {
+                    Toast.makeText(RegisterActivity.this, "Email không đúng! Kiểm tra lại email của bạn", Toast.LENGTH_SHORT).show();
+                } else if (!(matkhau1.length()>=6&&matkhau1.length()<=18 && matkhau2.length()>=6 && matkhau2.length()<=18)) {
+                    Toast.makeText(RegisterActivity.this, "Mật khẩu bao gồm ít nhất 6 ký tự", Toast.LENGTH_SHORT).show();
+                } else if (isValidFormat("dd/MM/yyyy",ngaysinh)==false) {
+                    Toast.makeText(RegisterActivity.this, "Ngày sinh không hợp lệ ", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                        if (matkhau1.equals(matkhau2)) {
+                            Member member = new Member(hoten, gioitinh, diachi, ngaysinh, cmnd, email);
+                            DataTT.child("Thông tin cá nhân").child(cmnd).setValue(member);
+                            Toast.makeText(RegisterActivity.this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
+                            DangKy();
+                            Intent intentCapNhat = new Intent(RegisterActivity.this, LoginActivity.class);
+                            intentCapNhat.putExtra("taikhoandk", email);
+                            intentCapNhat.putExtra("matkhaudk", matkhau1);
+                            startActivity(intentCapNhat);
+                        } else {
+                            Toast.makeText(RegisterActivity.this, "Mật khẩu không trùng khớp", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }
 
-            }
         });
     }
 
@@ -109,6 +132,22 @@ public class RegisterActivity extends AppCompatActivity {
         btnDangKy = (Button) findViewById(R.id.btnDangKy);
         rdGioiTinh = (RadioGroup) findViewById(R.id.rbGioiTinh);
     }
+
+    public static boolean isValidFormat(String format, String value) {
+
+        Date date = null;
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat(format);
+            date = sdf.parse(value);
+            if (!value.equals(sdf.format(date))) {
+                date = null;
+            }
+        } catch (ParseException ex) {
+            ex.printStackTrace();
+        }
+        return date != null;
+    }
+
 
     private void DangKy(){
         String email = edTaikhoan.getText().toString();

@@ -7,6 +7,8 @@ import android.os.Bundle;
 
 import com.finalproject.ncovitrackerproject.Shared_Preferences.DataLocalManager;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
 import androidx.annotation.NonNull;
@@ -26,13 +28,12 @@ import java.util.regex.Pattern;
 
 public class LoginActivity extends AppCompatActivity {
 
-    TextView txtDangky;
+    TextView txtDangky, txtResetPw;
     EditText edTaiKhoandn, edMatKhaudn;
     Button btnDangNhap;
 
     private FirebaseAuth mAuth;
-    private static final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-            + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
         String matkhaudn = intent.getStringExtra("matkhaudk");
         String email = DataLocalManager.getEmailLogin();
         //Kiểm tra email
-        boolean check = ((Pattern.compile(EMAIL_PATTERN)).matcher(email)).matches();
+        boolean check = ((Pattern.compile(Constants.EMAIL_PATTERN)).matcher(email)).matches();
         if (check == true) {
             edTaiKhoandn.setText(email);
         } else {
@@ -58,34 +59,17 @@ public class LoginActivity extends AppCompatActivity {
         btnDangNhap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (edMatKhaudn.getText().toString().length() == 0 || edMatKhaudn.getText().toString().length() == 0) {
+                if (edTaiKhoandn.getText().toString().length() == 0 || edMatKhaudn.getText().toString().length() == 0) {
                     Toast.makeText(LoginActivity.this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
-                } else {
+                } else if(((Pattern.compile(Constants.EMAIL_PATTERN)).matcher(edTaiKhoandn.getText().toString().trim())).matches()==false){
+                    Toast.makeText(LoginActivity.this, "Kiểm tra lại email của bạn", Toast.LENGTH_SHORT).show();
+
+                }else {
                     Login();
                 }
             }
         });
-//      //  Tạo đối tượng
-//        AlertDialog.Builder b = new AlertDialog.Builder(this);
-////Thiết lập tiêu đề
-//        b.setTitle("Xác nhận");
-//        b.setMessage("Bạn có đồng ý thoát chương trình không?");
-//// Nút Ok
-//        b.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
-//            public void onClick(DialogInterface dialog, int id) {
-//                finish();
-//            }
-//        });
-////Nút Cancel
-//        b.setNegativeButton("Không đồng ý", new DialogInterface.OnClickListener() {
-//            public void onClick(DialogInterface dialog, int id) {
-//                dialog.cancel();
-//            }
-//        });
-////Tạo dialog
-//        AlertDialog al = b.create();
-////Hiển thị
-//        al.show();
+
     }
 
     private void getView() {
@@ -93,14 +77,51 @@ public class LoginActivity extends AppCompatActivity {
         edTaiKhoandn = (EditText) findViewById(R.id.edtTaiKhoanDN);
         edMatKhaudn = (EditText) findViewById(R.id.edtMatKhauDN);
         btnDangNhap = (Button) findViewById(R.id.btnDangNhap);
+        txtResetPw = (TextView) findViewById(R.id.txtResetPass);
     }
-//Chuyển đến trang đăng ký
+
+    //Chuyển đến trang đăng ký
     public void Register(View view) {
         Intent register = new Intent(this, RegisterActivity.class);
         startActivity(register);
     }
 
-//Method đăng nhập
+    public void ResetPassword(View view) {
+        EditText resetMail = new EditText(view.getContext());
+        AlertDialog.Builder passwordResetDialog = new AlertDialog.Builder(view.getContext());
+        passwordResetDialog.setTitle("Đặt lại mật khẩu");
+        passwordResetDialog.setMessage("Nhập email của bạn để thiết lập lại mật khẩu của bạn");
+        passwordResetDialog.setView(resetMail);
+        passwordResetDialog.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String mail = resetMail.getText().toString().trim();
+                mAuth.sendPasswordResetEmail(mail).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Toast.makeText(LoginActivity.this, "Đã gửi đường dẫn đặt lại mật khẩu đến email của bạn", Toast.LENGTH_SHORT).show();
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(LoginActivity.this, "Lỗi! Không thể gửi email đặt lại mật khẩu" + e.getMessage(), Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+
+            }
+        });
+        passwordResetDialog.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        passwordResetDialog.create().show();
+    }
+
+    //Method đăng nhập
     private void Login() {
         String email = edTaiKhoandn.getText().toString().trim();
         String password = edMatKhaudn.getText().toString().trim();
@@ -111,9 +132,9 @@ public class LoginActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     Toast.makeText(LoginActivity.this, "Đăng nhập thành công !", Toast.LENGTH_SHORT).show();
                     Intent intenthome = new Intent(LoginActivity.this, MainActivity.class);
-                  //Lưu email để đăng nhập cho lần kế tiếp
+                    //Lưu email để đăng nhập cho lần kế tiếp
                     DataLocalManager.setEmailLogin(email.trim());
-                  //App đã từng được chạy trên thiết bị
+                    //App đã từng được chạy trên thiết bị
                     DataLocalManager.setFirstInstallApp(true);
                     startActivity(intenthome);
                     finish();

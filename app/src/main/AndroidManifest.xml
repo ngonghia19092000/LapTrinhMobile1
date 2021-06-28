@@ -13,7 +13,7 @@
         android:roundIcon="@drawable/stay_home"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light">
-        <activity android:name=".ChangePasswordActivity"></activity>
+        <activity android:name=".ChangePasswordActivity" />
         <activity android:name=".UpdateInfoActivity" />
         <activity android:name=".SplashActivity">
             <intent-filter>
