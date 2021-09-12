@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
+
 import com.finalproject.ncovitrackerproject.Constants;
 import com.finalproject.ncovitrackerproject.Models.Member;
 import com.finalproject.ncovitrackerproject.Shared_Preferences.DataLocalManager;
@@ -47,12 +48,12 @@ public class UpdateInfoActivity extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
         DataTT = firebaseDatabase.getReference("Thông tin cá nhân");
         user = FirebaseAuth.getInstance().getCurrentUser();
-email = DataLocalManager.getEmailLogin();
+        email = DataLocalManager.getEmailLogin();
         DataTT.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot ds : snapshot.getChildren()){
-                    if (ds.child("email").getValue().equals(email)){
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    if (ds.child("email").getValue().equals(email)) {
                         edHoten.setText(ds.child("fullName").getValue(String.class));
                         edCMND.setText(ds.child("cmnd").getValue(String.class));
                         edCMND.setFocusable(false);
@@ -81,10 +82,10 @@ email = DataLocalManager.getEmailLogin();
                 String diachi = edDiachi.getText().toString();
                 String ngaysinh = edNgaySinh.getText().toString();
                 String gioitinh = null;
-                if(rdNam.isChecked()){
+                if (rdNam.isChecked()) {
                     gioitinh = "Nam";
                 }
-                if (rdNu.isChecked()){
+                if (rdNu.isChecked()) {
                     gioitinh = "Nữ";
                 }
                 final String cmnd = edCMND.getText().toString();
@@ -93,10 +94,11 @@ email = DataLocalManager.getEmailLogin();
                 DataTT.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for (DataSnapshot ds : snapshot.getChildren()){
-                            if (ds.child("email").getValue().equals(email)){
+                        for (DataSnapshot ds : snapshot.getChildren()) {
+                            if (ds.child("email").getValue().equals(email)) {
                                 DataTT.child(cmnd).setValue(member);
-                            };
+                            }
+                            ;
                         }
                     }
 
@@ -132,6 +134,7 @@ email = DataLocalManager.getEmailLogin();
         rdNam = (RadioButton) findViewById(R.id.rbNamCN);
         rdNu = (RadioButton) findViewById(R.id.rbNuCN);
     }
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == android.R.id.home)

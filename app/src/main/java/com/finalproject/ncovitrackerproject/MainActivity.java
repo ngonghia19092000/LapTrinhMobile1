@@ -204,30 +204,6 @@ tv_time.setText(time(Long.parseLong(str_last_update_time)));
         progressDialog.dismiss();
     }
 
-    public String FormatDate(String date, int testCase) {
-        Date mDate = null;
-        String dateFormat;
-        try {
-            mDate = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.US).parse(date);
-            if (testCase == 0) {
-                dateFormat = new SimpleDateFormat("dd MMM yyyy, hh:mm a").format(mDate);
-                return dateFormat;
-            } else if (testCase == 1) {
-                dateFormat = new SimpleDateFormat("dd MMM yyyy").format(mDate);
-                return dateFormat;
-            } else if (testCase == 2) {
-                dateFormat = new SimpleDateFormat("hh:mm a").format(mDate);
-                return dateFormat;
-            } else {
-                Log.d("error", "Wrong input! Choose from 0 to 2");
-                return "Error";
-            }
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return date;
-        }
-    }
-
     private void Init() {
         tv_confirmed = findViewById(R.id.activity_main_confirmed_textview);
         tv_confirmed_new = findViewById(R.id.activity_main_confirmed_new_textview);

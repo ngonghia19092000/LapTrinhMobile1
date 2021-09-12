@@ -9,7 +9,7 @@
         android:name=".Shared_Preferences.MyApplication"
         android:allowBackup="true"
         android:icon="@drawable/stay_home"
-        android:label="Thống kê nCovi"
+        android:label="Thống kê COVID-19"
         android:roundIcon="@drawable/stay_home"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light">

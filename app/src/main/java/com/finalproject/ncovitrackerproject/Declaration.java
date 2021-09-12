@@ -46,7 +46,7 @@ public class Declaration extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_health_declaration);
-        getSupportActionBar().setTitle("Khai báo y tế");
+        getSupportActionBar().setTitle("Khai báo sức khỏe");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getView();
